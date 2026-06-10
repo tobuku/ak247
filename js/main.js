@@ -11,64 +11,12 @@
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
   } catch (e) {
     console.warn('GSAP plugin registration failed:', e);
-    killPreloader();
     return;
   }
 
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ---- PRELOADER (Safety net 2 & 3) ----
-  function killPreloader() {
-    var el = document.getElementById('preloader');
-    if (el) {
-      el.style.opacity = '0';
-      el.style.visibility = 'hidden';
-      el.style.pointerEvents = 'none';
-      setTimeout(function () { el.remove(); }, 500);
-    }
-  }
-
-  // Safety net 2: kill on window load
-  window.addEventListener('load', function () {
-    setTimeout(killPreloader, 4000);
-  });
-
-  // Safety net 3: try/catch around all animation code
-  try {
-    initPreloader();
-  } catch (e) {
-    console.warn('Preloader animation failed:', e);
-    killPreloader();
-    initSite();
-  }
-
-  function initPreloader() {
-    if (prefersReducedMotion) {
-      killPreloader();
-      initSite();
-      return;
-    }
-
-    var tl = gsap.timeline({
-      onComplete: function () {
-        gsap.to('#preloader', {
-          opacity: 0,
-          duration: 0.6,
-          ease: 'power2.inOut',
-          onComplete: function () {
-            killPreloader();
-            initSite();
-          }
-        });
-      }
-    });
-
-    tl.to('.preloader-logo', { opacity: 1, duration: 0.5, ease: 'power2.out' })
-      .to('.preloader-bar', { opacity: 1, duration: 0.3 }, '-=0.2')
-      .to('.preloader-tagline', { opacity: 1, duration: 0.3 }, '-=0.1')
-      .to('.preloader-bar-fill', { width: '100%', duration: 1.5, ease: 'power2.inOut' }, '-=0.3')
-      .to({}, { duration: 0.3 });
-  }
+  initSite();
 
   function initSite() {
     try {

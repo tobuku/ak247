@@ -47,67 +47,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   padding: 0 24px;
 }
 
-/* ---------- PRELOADER ---------- */
-/* Safety net 1: CSS auto-hide at 8s */
-@keyframes preloader-fallback {
-  0%, 99% { opacity: 1; visibility: visible; }
-  100% { opacity: 0; visibility: hidden; }
-}
-
-#preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  background: var(--black);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: preloader-fallback 8s forwards;
-}
-
-.preloader-content { text-align: center; }
-
-.preloader-logo {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 5rem);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--white);
-  opacity: 0;
-}
-
-.preloader-logo span {
-  background: linear-gradient(135deg, var(--silver-light), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.preloader-bar {
-  width: 200px;
-  height: 2px;
-  background: var(--slate);
-  margin: 24px auto 16px;
-  border-radius: 2px;
-  overflow: hidden;
-  opacity: 0;
-}
-
-.preloader-bar-fill {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--silver-light));
-  border-radius: 2px;
-}
-
-.preloader-tagline {
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  letter-spacing: 0.4em;
-  color: var(--silver);
-  opacity: 0;
-}
-
 /* ---------- NAVIGATION ---------- */
 .navbar {
   position: fixed;
@@ -1237,20 +1176,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     transform: none !important;
   }
 
-  .preloader-logo,
-  .preloader-bar,
-  .preloader-tagline {
-    opacity: 1 !important;
-  }
-
-  .preloader-bar-fill { width: 100% !important; }
-
   #hero-canvas { display: none; }
 }
 
 /* ---------- PRINT ---------- */
 @media print {
-  #preloader, .navbar, .floating-cta,
+  .navbar, .floating-cta,
   .hero-scroll-indicator, #hero-canvas,
   .hero-overlay, .section-divider,
   .hero-fin { display: none !important; }
