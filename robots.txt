@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ak247services.com/sitemap.xml
